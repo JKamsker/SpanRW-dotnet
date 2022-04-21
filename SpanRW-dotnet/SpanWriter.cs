@@ -54,7 +54,7 @@ public ref struct SpanWriter
     /// <param name="input"></param>
     /// <param name="value"></param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public unsafe void WriteSingle(float value) => WriteUInt32(*(uint*)&value);
+    public void WriteSingle(float value) => WriteUInt32(BitConverter.SingleToUInt32(value));
 
     /// <summary>
     /// Copied from <see cref="BinaryWriter.Write(ushort)"/>
