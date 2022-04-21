@@ -79,6 +79,19 @@ public class SpanWriterTests
     }
 
     [Benchmark]
+    public void TestUnsafeExtensions()
+    {
+        var writer = data.AsSpan();
+        for (int i = 0; i < N; i++)
+        {
+            writer.MMXWriteUShort(ushort.MaxValue); //2
+            writer.WriteBoolean(true); // 1
+            writer.MMXWriteInt32(123); // 4 
+            writer.MMXWriteInt64(456); // 8
+        }
+    }
+
+    [Benchmark]
     public void TestMemoryStream()
     {
         var memoryStream = new MemoryStream(data);
